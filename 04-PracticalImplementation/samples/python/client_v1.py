@@ -25,7 +25,7 @@ async def main():
     
     server_params = StdioServerParameters(
         command="python",
-        args=["server.py"],
+        args=["server_v1.py"],
     )
     
     try:
@@ -59,6 +59,15 @@ async def main():
                                         if isinstance(content, TextContent)), None)
                     if text_content:
                         print(f"\n2. Completion: {text_content.text}")
+
+                # 3. Call the Temperature conversion tool
+                logger.info("Testing Fahrenheit to Celsius")
+                temp_result = await session.call_tool("fahrenheit_to_celsius", arguments={"fahrenheit": 72.5)
+                if temp_result and temp_result.content:
+                    text_content = next((content for content in temp_result.content 
+                                        if isinstance(content, TextContent)), None)
+                    if text_content:
+                        print(f"\n1. Conversion result 72.5 = {text_content.text}")
                 
                 # 3. Get models resource
                 logger.info("Testing models resource")

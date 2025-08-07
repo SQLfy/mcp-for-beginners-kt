@@ -72,6 +72,24 @@ def add(a: int, b: int) -> int:
     logger.info(f"Adding {a} and {b}")
     return a + b
 
+import logging
+
+logger = logging.getLogger(__name__)
+
+@mcp.tool()
+def fahrenheit_to_celsius(fahrenheit: float) -> float:
+    """Convert Fahrenheit to Celsius.
+
+    Args:
+        fahrenheit: Temperature in °F.
+    Returns:
+        Temperature in °C (rounded to 2 decimals).
+    """
+    logger.info("Converting %s°F to Celsius", fahrenheit)
+    c = (fahrenheit - 32.0) * 5.0 / 9.0
+    return round(c, 2)
+########## END OF TOOLS SECTION #############
+
 # Define a models resource to expose available AI models
 @mcp.resource("models://")
 def get_models() -> str:
